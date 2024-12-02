@@ -36,58 +36,34 @@ This derivative is used during backpropagation to compute gradients.
 ### 3. Forward Propagation
 
 In forward propagation, the following steps occur:
-1. **Hidden Layer Calculations**:
-   - For neuron `h1`:  
-     $$ h1 = \sigma(x1 \cdot w1 + x2 \cdot w3) $$
-   - For neuron `h2`:  
-     $$ h2 = \sigma(x1 \cdot w2 + x2 \cdot w4) $$
-
-2. **Output Layer Calculation**:
-   $$ output1 = \sigma(h1 \cdot w5 + h2 \cdot w6) $$
-
+1. Hidden Layer Calculations
+2. Output Layer Calculation
+   
 ### 4. Backpropagation
 
 During backpropagation, the following steps are performed:
-1. **Compute the Error**:  
-   The error is computed using Mean Squared Error (MSE):
-   $$ \text{MSE} = (y_{\text{expected}} - y_{\text{predicted}})^2 $$
+1. Compute the error using Mean Squared Error (MSE)
+2. Compute Derivatives
+3. Update Weights
+4. After performing forward propagation, backpropagation, and weight updates, the new predicted output and MSE are computed and compared to the previous output to check the improvement in prediction.
 
-2. **Compute Derivatives**:  
-   The derivative of the loss function with respect to the weights is calculated:
-   - For output layer weights (`dw5` and `dw6`):
-     $$ \Delta w5 = \frac{\partial L}{\partial w5} = dL_{\text{o1}} \cdot \text{do1}_{z3} \cdot h1 $$
-     $$ \Delta w6 = \frac{\partial L}{\partial w6} = dL_{\text{o1}} \cdot \text{do1}_{z3} \cdot h2 $$
-
-   - For hidden layer weights (`dw1`, `dw2`, `dw3`, `dw4`):
-     $$ \Delta w1 = dL_{\text{h1}} \cdot \text{dh1}_{z1} \cdot x1 $$
-     $$ \Delta w2 = dL_{\text{h2}} \cdot \text{dh2}_{z2} \cdot x1 $$
-     $$ \Delta w3 = dL_{\text{h1}} \cdot \text{dh1}_{z1} \cdot x2 $$
-     $$ \Delta w4 = dL_{\text{h2}} \cdot \text{dh2}_{z2} \cdot x2 $$
-
-3. **Update Weights**:  
-- Using the calculated gradients, weights are updated using gradient descent:
-   $$ w_{\text{new}} = w_{\text{old}} - \eta \cdot \Delta w $$
-
-- After performing forward propagation, backpropagation, and weight updates, the new predicted output and MSE are computed and compared to the previous output to check the improvement in prediction.
-
-### 6. Code Explanation
+### 5. Explanation
 
 - Inputs: `x1 = 0.5`, `x2 = 0.3`, expected output `y_expected = 1`, and learning rate `n = 0.1`.
 - Initial Weights:  
   The initial weights are:  
   `w1 = 0.7010`, `w2 = 0.3009`, `w3 = 0.4011`, `w4 = 0.6005`, `w5 = 0.551`, `w6 = 0.4595`.
 
-### 7. Functions
+### 6. Functions
 
-- **`sigmoid(x)`**: Returns the sigmoid of input `x`.
-- **`sigmoid_derivative(x)`**: Returns the derivative of the sigmoid of input `x`.
-- **`l1f1(x1, x2)` and `l1f2(x1, x2)`**: Compute the activations of the two hidden neurons.
-- **`of1(h1, h2)`**: Computes the output layer activation.
-- **`mse(y_expected, y_predicted)`**: Computes the Mean Squared Error between the expected and predicted output.
-- **`mse_derivative(y_expected, y_predicted)`**: Computes the derivative of MSE with respect to the predicted output.
+- `sigmoid(x)`: Returns the sigmoid of input `x`.
+- `sigmoid_derivative(x)`: Returns the derivative of the sigmoid of input `x`.
+- `l1f1(x1, x2)` and `l1f2(x1, x2)`: Compute the activations of the two hidden neurons.
+- `of1(h1, h2)`: Computes the output layer activation.
+- `mse(y_expected, y_predicted)`: Computes the Mean Squared Error between the expected and predicted output.
+- `mse_derivative(y_expected, y_predicted)`: Computes the derivative of MSE with respect to the predicted output.
 
-### 8. Output
-
+### 7. Output
 The output will display:
 - The values of the hidden layer activations (`h1` and `h2`).
 - The predicted output before and after the weight update.
